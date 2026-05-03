@@ -53,15 +53,124 @@
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap');
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background-color: #F4F7FA;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #07111F;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            font-family: 'DM Sans', system-ui, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        section {
+            margin: 2rem auto;
+            padding: 1rem;
+            max-width: 800px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0.5rem 1rem;
+            max-width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #003054;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #002244;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 2rem 0;
+        }
+
+        .output-container {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            column-gap: 2rem;
+        }
+
+        .output-container section {
+            padding: 1rem;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        code {
+            display: block;
+            white-space: pre-wrap;
+            background: #f4f4f9;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .divider {
+            background-color: #ddd;
         }
     </style>
 </head>
 <body>
+    <header>
+        <img src="sic-logo.png" alt="SIC Logo" style="background-color: #F4F7FA; padding: 0.25rem; border-radius: 0.25rem">
+        Skyline Investment Club e.V. - Signature Generator
+    </header>
     <section>
         <h1>Generate your signature:</h1>
-        <form style="display: grid; grid-template-columns: 1fr 2fr; gap: 0.25rem 1rem; max-width: max-content;">
+        <form>
             <label for="fName">Your full name:</label>
             <input id="fName" type="text" placeholder="Surname Lastname">
             <label for="fPosition">Your position:</label>
@@ -69,24 +178,21 @@
             <label for="fMNumber">Your mobile number (including country code, e.g. +49):</label>
             <input id="fMNumber" type="text" placeholder="+49 1234 567890">
             <label for="fMAdress">Your SIC mail address:</label>
-            <input id="fMAdress" type="text" placeholder="name@skyline-investment-club.com">
+            <input id="fMAdress" type="text" placeholder="surname.lastname@skyline-investment-club.com">
         </form>
-        <br>
         <button onclick="generate()">Generate</button>
     </section>
     <hr>
-    <div style="display: grid; grid-template-columns: 1fr 1px 1fr; column-gap: 2rem;">
+    <div class="output-container">
         <section>
             <h2>HTML Code Below:</h2>
             <button disabled onclick="copyHTML()">Copy</button>
-            <br>
             <code id="outCode"></code>
         </section>
-        <div style="background-color: #00000038;"></div>
+        <div class="divider"></div>
         <section>
             <h2>Visual (please only resort to this if implementing a HTML Signature is not possible):</h2>
             <button disabled onclick="copyVisual()">Copy</button>
-            <br>
             <div id="outVisual"></div>
         </section>
     </div>
