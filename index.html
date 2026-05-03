@@ -6,7 +6,7 @@
     <title>SIC Signature Generator</title>
     <script>
         let signatureTemplate = "";
-        
+
         fetch('./sic-signature.html').then(response => response.text()).then(data => {
             signatureTemplate = data;
             console.log(signatureTemplate.includes("github.com"))
@@ -67,7 +67,7 @@
         header {
             background-color: #07111F;
             color: white;
-            padding: 1rem 0;
+            padding: 1rem 1rem;
             text-align: center;
             font-family: 'DM Sans', system-ui, sans-serif;
             font-size: 2rem;
@@ -85,7 +85,6 @@
         section {
             margin: 2rem auto;
             padding: 1rem;
-            max-width: 800px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -147,7 +146,7 @@
             background: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 4px;
-            width: 100%;
+            width: calc(100% - 3rem);
         }
 
         code {
@@ -162,47 +161,68 @@
         .divider {
             background-color: #ddd;
         }
+
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .output-container {
+                grid-template-columns: 1fr;
+            }
+
+            .divider {
+                height: 1px;
+                width: 100%;
+            }
+        }
     </style>
 
     <script>
-    function resizeIframe(obj) {
-        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-        obj.style.width = obj.contentWindow.document.documentElement.scrollwidth + 'px';
-    }
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+            obj.style.width = obj.contentWindow.document.documentElement.scrollwidth + 'px';
+        }
     </script>
 </head>
+
 <body>
     <header>
-        <img src="sic-logo.png" alt="SIC Logo" style="background-color: #F4F7FA; padding: 0.25rem; border-radius: 0.25rem">
+        <img src="sic-logo.png" alt="SIC Logo"
+            style="background-color: #F4F7FA; padding: 0.25rem; border-radius: 0.25rem">
         Skyline Investment Club e.V. - Signature Generator
     </header>
-    <section>
-        <h1>Generate your signature:</h1>
-        <form>
-            <label for="fName">Your full name:</label>
-            <input id="fName" type="text" placeholder="Surname Lastname">
-            <label for="fPosition">Your position:</label>
-            <input id="fPosition" type="text" placeholder="Member of Fictional Department">
-            <label for="fMNumber">Your mobile number (including country code, e.g. +49):</label>
-            <input id="fMNumber" type="text" placeholder="+49 1234 567890">
-            <label for="fMAdress">Your SIC mail address:</label>
-            <input id="fMAdress" type="text" placeholder="surname.lastname@skyline-investment-club.com">
-        </form>
-        <button onclick="generate()">Generate</button>
-    </section>
-    <hr>
-    <div class="output-container">
-        <section>
-            <h2>HTML Code Below:</h2>
-            <button disabled onclick="copyHTML()">Copy</button>
-            <code id="outCode"></code>
+    <div style="margin: 0 1rem">
+        <section style="max-width: 800px;">
+            <h1>Generate your signature:</h1>
+            <form>
+                <label for="fName">Your full name:</label>
+                <input id="fName" type="text" placeholder="Surname Lastname">
+                <label for="fPosition">Your position:</label>
+                <input id="fPosition" type="text" placeholder="Member of Fictional Department">
+                <label for="fMNumber">Your mobile number (including country code, e.g. +49):</label>
+                <input id="fMNumber" type="text" placeholder="+49 1234 567890">
+                <label for="fMAdress">Your SIC mail address:</label>
+                <input id="fMAdress" type="text" placeholder="surname.lastname@skyline-investment-club.com">
+            </form>
+            <button onclick="generate()">Generate</button>
         </section>
-        <div class="divider"></div>
-        <section>
-            <h2>Visual (please only resort to this if implementing a HTML Signature is not possible):</h2>
-            <button disabled onclick="copyVisual()">Copy</button>
-            <iframe id="outVisual" style="border-style: none; display: block; background-color: #fff; padding: 1rem; height: 0; overflow: hidden" onload="resizeIframe(this)"></iframe>
-        </section>
+        <hr>
+        <div class="output-container">
+            <section>
+                <h2>HTML Code Below:</h2>
+                <button disabled onclick="copyHTML()">Copy</button>
+                <code id="outCode"></code>
+            </section>
+            <div class="divider"></div>
+            <section>
+                <h2>Visual (please only resort to this if implementing a HTML Signature is not possible):</h2>
+                <button disabled onclick="copyVisual()">Copy</button>
+                <iframe id="outVisual"
+                    style="border-style: none; display: block; background-color: #fff; padding: 1rem; height: 0; overflow: hidden"
+                    onload="resizeIframe(this)"></iframe>
+            </section>
+        </div>
     </div>
 </body>
 </html>
