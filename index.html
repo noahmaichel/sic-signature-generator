@@ -22,7 +22,7 @@
             let outCode = document.getElementById("outCode");
             let outVisual = document.getElementById("outVisual");
 
-            let result = signatureTemplate.replace("[NAME]", fName).replace("[POSITION]", fPosition).replace("[MN]", fMNumber).replace("[MA]", fMAdress);
+            let result = signatureTemplate.replace(/\[NAME\]/g, fName).replace(/\[POSITION\]/g, fPosition).replace(/\[MN\]/g, fMNumber).replace(/\[MA\]/g, fMAdress);
 
             outCode.innerText = result;
             outVisual.innerHTML = result;
