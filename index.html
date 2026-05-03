@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FSBF Signature Generator</title>
+    <title>SIC Signature Generator</title>
     <script>
         let signatureTemplate = "";
         
-        fetch('./template.html').then(response => response.text()).then(data => {
+        fetch('./sic-signature.html').then(response => response.text()).then(data => {
             signatureTemplate = data;
             console.log(signatureTemplate.includes("github.com"))
         }).catch(error => {
@@ -68,8 +68,8 @@
             <input id="fPosition" type="text" placeholder="Member of Fictional Department">
             <label for="fMNumber">Your mobile number (including country code, e.g. +49):</label>
             <input id="fMNumber" type="text" placeholder="+49 1234 567890">
-            <label for="fMAdress">Your FSBF mail address:</label>
-            <input id="fMAdress" type="text" placeholder="fictional@fs-businessforum.com">
+            <label for="fMAdress">Your SIC mail address:</label>
+            <input id="fMAdress" type="text" placeholder="name@skyline-investment-club.com">
         </form>
         <br>
         <button onclick="generate()">Generate</button>
