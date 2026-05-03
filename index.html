@@ -25,7 +25,7 @@
             let result = signatureTemplate.replace(/\[NAME\]/g, fName).replace(/\[POSITION\]/g, fPosition).replace(/\[MN\]/g, fMNumber).replace(/\[MA\]/g, fMAdress);
 
             outCode.innerText = result;
-            outVisual.innerHTML = result;
+            outVisual.srcdoc = result;
 
             [...document.getElementsByTagName("button")].forEach(element => {
                 element.disabled = false;
@@ -39,14 +39,15 @@
         }
 
         function copyVisual() {
-            let contentElement = document.getElementById("outVisual");
-            let range = document.createRange();
-            range.selectNode(contentElement);
-            let selection = window.getSelection();
+            let iframe = document.getElementById("outVisual");
+            let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            let range = iframeDoc.createRange();
+            range.selectNode(iframeDoc.body);
+            let selection = iframeDoc.getSelection();
 
             selection.removeAllRanges();
             selection.addRange(range);
-            document.execCommand("copy");
+            iframeDoc.execCommand("copy");
             selection.removeAllRanges();
 
             alert("Copied visual to clipboard");
@@ -162,6 +163,12 @@
             background-color: #ddd;
         }
     </style>
+
+    <script>
+    function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+    }
+    </script>
 </head>
 <body>
     <header>
@@ -193,7 +200,7 @@
         <section>
             <h2>Visual (please only resort to this if implementing a HTML Signature is not possible):</h2>
             <button disabled onclick="copyVisual()">Copy</button>
-            <div id="outVisual"></div>
+            <iframe id="outVisual" style="border-style: none; height: 0; overflow: hidden" onload="resizeIframe(this)"></iframe>
         </section>
     </div>
 </body>
