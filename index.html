@@ -167,6 +167,7 @@
     <script>
     function resizeIframe(obj) {
         obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        obj.style.width = obj.contentWindow.document.documentElement.scrollwidth + 'px';
     }
     </script>
 </head>
@@ -200,7 +201,7 @@
         <section>
             <h2>Visual (please only resort to this if implementing a HTML Signature is not possible):</h2>
             <button disabled onclick="copyVisual()">Copy</button>
-            <iframe id="outVisual" style="border-style: none; height: 0; overflow: hidden" onload="resizeIframe(this)"></iframe>
+            <iframe id="outVisual" style="border-style: none; background-color: #fff; padding: 1rem; height: 0; overflow: hidden" onload="resizeIframe(this)"></iframe>
         </section>
     </div>
 </body>
